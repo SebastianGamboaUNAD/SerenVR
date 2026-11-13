@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/img/logo.png">
+<title>SerenVR · Respira · Relájate · Vive</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#14264a;--navy2:#1d3a63;--sky:#6ea8d8;--lil:#9f8fe0;--mint:#6fc6a3;--pink:#d68ad6;--tx:#17315a;--glass:rgba(255,255,255,.58)}
+*{box-sizing:border-box}
+body{margin:0;font:400 1.05rem/1.55 Outfit,system-ui,sans-serif;color:var(--tx);min-height:100vh;display:flex;
+background:url(assets/img/fondo.jpg) center/cover fixed,linear-gradient(180deg,#8fbbe6 0%,#d7e6f2 45%,#9db9d3 70%,#7f9fbd 100%)}
+h1,h2,h3{font-weight:500;margin:0 0 .4em;line-height:1.15}
+h1{font-size:clamp(2.2rem,5vw,3.6rem)}h2{font-size:clamp(1.6rem,3.5vw,2.3rem)}
+button,select,input,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:999px;padding:.65em 1.4em;color:#10233f;font-weight:500}
+select,input[type=text]{padding:.55em .9em;border-radius:12px;border:1px solid #9fb6d0;background:#fff;color:var(--tx)}
+:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 5px var(--navy2)}
+aside{width:270px;flex:none;background:linear-gradient(180deg,var(--navy),#1a3157);color:#e8f0fa;padding:1.5rem 1.1rem;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{text-align:center;margin-bottom:1.5rem}.brand b{display:block;font-size:1.9rem;font-weight:400}.brand small{color:#b9cde6}
+aside nav a{display:flex;gap:.7rem;align-items:center;color:#dbe7f5;text-decoration:none;padding:.7rem 1rem;border-radius:12px;margin-bottom:.25rem}
+aside nav a[aria-current=page]{background:linear-gradient(90deg,#5b9bc6,#6aa9d0);color:#fff}
+.emerg{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.2);font-size:.9rem}
+.emerg button{background:#78b4e0;margin-top:.5rem;width:100%}
+.foot{margin-top:auto;text-align:center;font-size:.85rem;color:#b9cde6}
+main{flex:1;min-width:0;padding:2.5rem clamp(1rem,4vw,3rem) 3rem}
+.view{display:none}.view.on{display:block}
+.lead{max-width:60ch;font-size:1.1rem}
+.cards{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:2rem 0}
+.card{border-radius:20px;min-height:400px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.3rem;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.6);
+background:linear-gradient(180deg,transparent 30%,rgba(12,30,55,.92) 72%),var(--img,none),var(--g);background-size:cover;background-position:center}
+.card .ic{font-size:2rem}.card h3{font-size:1.4rem}.card p{margin:.2rem 0 1rem;color:#e6eef8;font-size:.98rem}.card button{width:100%}
+.note,.panel{background:var(--glass);backdrop-filter:blur(8px);border-radius:18px;padding:1.2rem 1.4rem;margin:1.2rem 0;border:1px solid rgba(255,255,255,.7)}
+.note{display:flex;gap:1rem;align-items:center;font-size:.95rem}
+.list{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.item{border-radius:14px;min-height:110px;padding:.9rem;color:#fff;text-align:left;display:flex;align-items:flex-end;font-size:1.05rem;border:2px solid transparent;border-radius:14px;
+background:linear-gradient(180deg,transparent,rgba(12,30,55,.85)),var(--img,none),var(--g);background-size:cover;background-position:center}
+.item[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 3px var(--sky)}
+.row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+input[type=range]{accent-color:var(--navy2);width:170px}
+.stage{position:relative;border-radius:18px;overflow:hidden;background:#0d1f3a;aspect-ratio:16/9;max-height:70vh;width:100%;margin:1rem 0;display:grid;place-items:center;color:#fff}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.msg{position:relative;padding:1rem;text-align:center;max-width:42ch}
+.ring{width:170px;height:170px;border-radius:50%;display:grid;place-items:center;font-size:2.4rem;color:#fff;background:radial-gradient(circle at 35% 30%,#cfe6ff,var(--sky) 60%,var(--navy2));transition:transform 4s ease-in-out;margin:2.2rem auto}
+.mixrow{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;padding:.3rem 0}
+.chat{height:340px;overflow:auto;background:rgba(255,255,255,.7);border-radius:14px;padding:1rem;display:flex;flex-direction:column;gap:.6rem}
+.b{max-width:80%;padding:.6rem .9rem;border-radius:14px;white-space:pre-wrap}
+.b.u{align-self:flex-end;background:var(--navy2);color:#fff}.b.b{align-self:flex-start;background:#fff}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}.chips button{background:#fff;font-size:.92rem;padding:.45em 1em}
+.ico-img{width:1.25em;height:1.25em;object-fit:contain;vertical-align:-.25em}.card .ic .ico-img{width:2.2rem;height:2.2rem}.item .ico-img,.item>span{margin-right:.45em}
+.fsbar{position:absolute;right:12px;bottom:12px;z-index:3;display:flex;gap:.5rem}
+.fsbar button{background:rgba(10,25,50,.78);color:#fff;padding:.5em 1em;font-size:.95rem}
+.stage:fullscreen,.stage:-webkit-full-screen{max-height:none;width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;background:#000}
+.stage:fullscreen video,.stage:-webkit-full-screen video{object-fit:contain}
+@media(max-width:800px){body{flex-direction:column}aside{width:100%;height:auto;position:static;padding:1rem}aside nav{display:flex;flex-wrap:wrap;gap:.2rem}.emerg,.foot{display:none}.brand{margin-bottom:.5rem}}
+@media(prefers-reduced-motion:reduce){.ring{transition:none!important}}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand">
+    <img src="assets/img/logo.png" alt="Logo de SerenVR" width="72" onerror="this.style.display='none';document.getElementById('logosvg').style.display='inline'"><svg id="logosvg" style="display:none" width="64" height="56" viewBox="0 0 64 56" fill="none" stroke="#cfe3f7" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M32 6c7 8 7 22 0 34-7-12-7-26 0-34zM30 40C20 38 10 30 8 16c12 0 20 8 22 24zM34 40c10-2 20-10 22-24-12 0-20 8-22 24zM22 46c6 4 14 4 20 0"/></svg>
+    <b>SerenVR</b><small>Respira · Relájate · Vive</small>
+  </div>
+  <nav aria-label="Menú principal">
+    <a href="#inicio" data-v="inicio"><span data-ico="inicio">🏠</span> Inicio</a>
+    <a href="#completa" data-v="completa"><span data-ico="completa">🎬</span> Experiencia completa</a>
+    <a href="#respiracion" data-v="respiracion"><span data-ico="respiracion">🫁</span> Respiración guiada</a>
+    <a href="#sonidos" data-v="sonidos"><span data-ico="sonidos">🎧</span> Sonidos ambientales</a>
+    <a href="#ayuda" data-v="ayuda"><span data-ico="ayuda">❓</span> Ayuda</a>
+  </nav>
+  <div class="emerg"><b>Contacto de emergencia</b><br>¿Necesitas ayuda?<button onclick="location.hash='ayuda'">Contactar</button></div>
+  <div class="foot">Tu bienestar es importante ♡<br><small>SerenVR v1.5</small></div>
+</aside>
+
+<main>
+<section id="inicio" class="view">
+  <h1>Bienvenido a SerenVR</h1>
+  <h2 style="font-weight:400">Un espacio inmersivo para tu bienestar</h2>
+  <p class="lead">Elige una opción y comienza tu experiencia de relajación. Puedes explorar videos, sonidos y ejercicios de respiración.</p>
+  <div class="cards">
+    <a class="card" href="#completa" style="--img:url(assets/img/bosque.jpg);--g:linear-gradient(180deg,#4d8fc4,#2f6b55)"><span class="ic" data-ico="completa">🎬</span><h3>Experiencia completa</h3><p>Un video relajante acompañado de música, a pantalla grande.</p><button style="background:var(--sky)">Comenzar →</button></a>
+    <a class="card" href="#respiracion" style="--img:url(assets/img/respiracion.jpg);--g:linear-gradient(180deg,#f0a98a,#6a5aa8)"><span class="ic" data-ico="respiracion">🫁</span><h3>Respiración guiada</h3><p>Dinos cómo te sientes y sigue el ritmo con la guía visual.</p><button style="background:var(--lil)">Comenzar →</button></a>
+    <a class="card" href="#sonidos" style="--img:url(assets/img/mar.jpg);--g:linear-gradient(180deg,#f3b78a,#2f6f8f)"><span class="ic" data-ico="sonidos">🎵</span><h3>Sonidos ambientales</h3><p>Mezcla tus sonidos favoritos y crea tu ambiente ideal.</p><button style="background:var(--mint)">Explorar →</button></a>
+    <a class="card" href="#ayuda" style="--g:linear-gradient(180deg,#8d8fcf,#3d5a8f)"><span class="ic" data-ico="ayuda">🎧</span><h3>Ayuda y soporte</h3><p>Pregúntale a nuestro asistente o revisa las dudas frecuentes.</p><button style="background:var(--pink)">Contactar →</button></a>
+  </div>
+  <div class="note">💡 <span>Recuerda: esta plataforma es una herramienta de apoyo para tu bienestar. No reemplaza la atención profesional en salud mental.</span></div>
+</section>
+
+<section id="completa" class="view">
+  <h2>Experiencia completa</h2>
+  <p class="lead">Elige un video relajante; viene con su música incluida.</p>
+  <div class="list" id="lcomp"></div>
+  <div class="stage" id="scomp"><div class="msg" id="mcomp">Selecciona un video para comenzar.</div><div class="fsbar"><button id="fspp" type="button">Pausar</button><button id="fsb" type="button">⛶ Pantalla completa</button></div></div>
+  <div class="panel row"><button id="cpp" style="background:var(--sky)">Pausar</button><label class="row">Volumen de la música <input type="range" id="cvol" min="0" max="100" value="60"></label><button id="cfs" style="background:#fff">Pantalla completa</button></div>
+</section>
+
+<section id="respiracion" class="view">
+  <h2>Respiración guiada</h2>
+  <p class="lead">Elige cómo te sientes y qué tan intenso es. La técnica y la duración se ajustan a ti.</p>
+  <div class="panel row">
+    <label>Me siento con <select id="tec"></select></label>
+    <label class="row">Malestar (1-10) <input type="range" id="lvl" min="1" max="10" value="5"><b id="lvlv">5</b></label>
+    <label>Sonido relajante <select id="rsnd"></select></label>
+    <label class="row">Volumen <input type="range" id="rvol" min="0" max="100" value="35"></label>
+  </div>
+  <p id="tdesc" class="lead"></p>
+  <div class="panel" style="text-align:center"><div class="ring" id="ring"><span id="rsec"></span></div><h3 id="rtxt" aria-live="polite">Pulsa «Empezar»</h3><div id="rprog"></div><button id="rbtn" style="background:var(--lil);margin-top:1rem">Empezar</button><div id="rend" style="margin-top:1rem"></div></div>
+  <div class="note">⚠️ <span>Respira con suavidad. Si sientes mareo, respira con normalidad. Si el malestar es muy fuerte o persiste, busca apoyo profesional.</span></div>
+</section>
+
+<section id="sonidos" class="view">
+  <h2>Sonidos ambientales</h2>
+  <p class="lead">Activa uno o varios sonidos a la vez y ajusta cada volumen para crear tu mezcla.</p>
+  <div class="list" id="laud"></div><p id="laudmsg" aria-live="polite"></p>
+  <div class="panel"><div class="row"><b>Tu mezcla</b><button id="astop" style="background:#fff">Detener todo</button></div><div id="mix"><em>Aún no has activado sonidos.</em></div></div>
+</section>
+
+<section id="ayuda" class="view">
+  <h2>Ayuda y soporte</h2>
+  <div class="panel">
+    <b>Preguntas frecuentes</b>
+    <div class="chips" id="chips"></div>
+    <div class="chat" id="chat" aria-live="polite"></div>
+    <div class="row" style="margin-top:.8rem"><input type="text" id="q" maxlength="500" placeholder="Escribe tu pregunta…" style="flex:1;min-width:200px"><button id="send" style="background:var(--sky)">Enviar</button></div>
+  </div>
+  <div class="panel"><b>Contactos de apoyo</b><div id="contacto"></div></div>
+  <div class="note">💡 <span>Las respuestas son orientación general y no reemplazan la atención profesional en salud mental.</span></div>
+</section>
+</main>
+
+<script src="config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const G=["linear-gradient(135deg,#3b78a8,#2f6b55)","linear-gradient(135deg,#f0a98a,#6a5aa8)","linear-gradient(135deg,#3f8fa6,#1d3a63)","linear-gradient(135deg,#6fc6a3,#2f6f8f)"];
+const VIEWS=[...document.querySelectorAll('.view')].map(v=>v.id);
+function route(){let v=location.hash.slice(1);if(!VIEWS.includes(v))v='inicio';
+ VIEWS.forEach(x=>$(x).classList.toggle('on',x===v));
+ document.querySelectorAll('aside nav a').forEach(a=>a.dataset.v===v?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+ if(v!=='completa')stopComp();if(v!=='sonidos')stopMix();if(v!=='respiracion')stopB();window.scrollTo(0,0)}
+addEventListener('hashchange',route);
+function icoEl(v){if(/\.(png|svg|jpe?g|webp|gif)$/i.test(v)){const i=new Image();i.src=v;i.alt='';i.className='ico-img';i.onerror=()=>{i.style.display='none'};return i}const s=document.createElement('span');s.textContent=v;return s}
+function listar(el,arr,fn){arr.forEach((o,i)=>{const b=document.createElement('button');b.className='item';b.textContent=o.t;if(o.ico)b.prepend(icoEl(o.ico));b.setAttribute('aria-pressed','false');
+ b.style.cssText=`--g:${G[i%4]};${o.img?`--img:url(${o.img})`:''}`;b.onclick=()=>fn(o,b);el.appendChild(b)})}
+$('contacto').innerHTML=CONTACTO_HTML;
+
+/* ---- Reproductor de audio ---- */
+function voice(f,v){const a=new Audio(f);a.loop=true;const o={v,err:false,
+ start(){a.volume=o.v;return a.play().catch(()=>{o.err=true})},
+ vol(x){o.v=x;a.volume=x},
+ stop(){a.pause();a.removeAttribute('src')}};return o}
+
+/* Mezclador de sonidos */
+const mix={};
+function renderMix(){const el=$('mix'),ks=Object.keys(mix);el.innerHTML=ks.length?'':'<em>Aún no has activado sonidos.</em>';
+ ks.forEach(k=>{const r=document.createElement('div');r.className='mixrow';r.innerHTML=`<span style="min-width:140px">${mix[k].t}</span><input type="range" min="0" max="100" value="${mix[k].v.v*100}" aria-label="Volumen de ${mix[k].t}">`;
+  r.querySelector('input').oninput=e=>mix[k].v.vol(e.target.value/100);el.appendChild(r)})}
+function stopMix(){Object.values(mix).forEach(m=>m.v.stop());for(const k in mix)delete mix[k];document.querySelectorAll('#laud .item').forEach(b=>b.setAttribute('aria-pressed','false'));renderMix()}
+listar($('laud'),AUDIOS,(o,b)=>{$('laudmsg').textContent='';if(mix[o.f]){mix[o.f].v.stop();delete mix[o.f];b.setAttribute('aria-pressed','false');renderMix();return}
+ const v=voice(o.f,.5);mix[o.f]={t:o.t,v};b.setAttribute('aria-pressed','true');renderMix();
+ v.start().then(()=>{if(v.err){delete mix[o.f];b.setAttribute('aria-pressed','false');$('laudmsg').textContent='No se encontró '+o.f+'. Súbelo a la carpeta assets/audio.';renderMix()}})});
+$('astop').onclick=stopMix;
+
+/* Experiencia completa */
+let cv=null,cm=null,cur=null;
+function stopComp(){if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document);if(cv){cv.pause();cv.remove()}if(cm)cm.stop();cv=cm=null}
+listar($('lcomp'),COMPLETA,(o,b)=>{stopComp();cur=o;document.querySelectorAll('#lcomp .item').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+ const v=document.createElement('video');v.src=o.v;v.loop=true;v.muted=true;v.playsInline=true;
+ v.onerror=()=>{$('mcomp').textContent='No se encontró '+o.v+'. Súbelo a la carpeta assets/videos.'};$('mcomp').textContent='';$('scomp').prepend(v);cv=v;v.play().catch(()=>{});
+ cm=voice(o.a,$('cvol').value/100);cm.start().then(()=>{if(cm&&cm.err)$('mcomp').textContent='No se encontró '+o.a+' en assets/audio.'});setPP('Pausar')});
+$('cpp').onclick=()=>{if(!cv)return;if(cv.paused){cv.play();cm=voice(cur.a,$('cvol').value/100);cm.start();setPP('Pausar')}else{cv.pause();cm&&cm.stop();setPP('Reproducir')}};
+$('cvol').oninput=e=>cm&&cm.vol(e.target.value/100);
+function setPP(x){$('cpp').textContent=x;$('fspp').textContent=x}
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+function toggleFS(){const st=$('scomp');
+ if(fsEl()){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return}
+ if(!cv){$('mcomp').textContent='Primero elige un video.';return}
+ if(st.requestFullscreen)st.requestFullscreen().catch(()=>{});
+ else if(st.webkitRequestFullscreen)st.webkitRequestFullscreen();
+ else if(cv.webkitEnterFullscreen)cv.webkitEnterFullscreen();}
+function fsUi(){const on=!!fsEl();$('cfs').textContent=on?'Salir de pantalla completa':'Pantalla completa';$('fsb').textContent=on?'⤡ Salir de pantalla completa':'⛶ Pantalla completa'}
+['fullscreenchange','webkitfullscreenchange'].forEach(e=>document.addEventListener(e,fsUi));
+$('cfs').onclick=$('fsb').onclick=toggleFS;
+$('fspp').onclick=()=>$('cpp').onclick();
+
+/* Respiración según el estado */
+Object.entries(TEC).forEach(([k,t])=>$('tec').add(new Option(t.n,k)));
+const upd=()=>{$('tdesc').textContent=TEC[$('tec').value].d;$('lvlv').textContent=$('lvl').value};$('tec').onchange=$('lvl').oninput=upd;upd();
+let B=null,bm=null;
+$('rsnd').add(new Option('Sin sonido',''));AUDIOS.forEach(a=>$('rsnd').add(new Option(a.t,a.f)));
+$('rsnd').onchange=()=>{if(!B)return;if(bm){bm.stop();bm=null}const f=$('rsnd').value;if(f){bm=voice(f,$('rvol').value/100);bm.start()}};
+$('rvol').oninput=e=>{if(bm)bm.vol(e.target.value/100)};
+function stopB(){clearInterval(B);B=null;if(bm){bm.stop();bm=null}$('ring').style.transform='scale(1)';$('rsec').textContent='';$('rtxt').textContent='Pulsa «Empezar»';$('rprog').textContent='';$('rbtn').textContent='Empezar'}
+$('rbtn').onclick=()=>{if(B)return stopB();$('rend').innerHTML='';
+ const t=TEC[$('tec').value],pre=+$('lvl').value,total=4+Math.round(pre/2);let c=0,i=0,left=0;
+ const sf=$('rsnd').value;if(sf){bm=voice(sf,$('rvol').value/100);bm.start().then(()=>{if(bm&&bm.err)$('rend').textContent='No se encontró '+sf+'. Súbelo a la carpeta assets/audio.'})}
+ const step=()=>{if(left<=0){if(i>=t.p.length){i=0;c++}if(c>=total)return fin(pre);const[p,s,sc]=t.p[i++];left=s;$('rtxt').textContent=p;$('ring').style.transitionDuration=s+'s';$('ring').style.transform='scale('+sc+')'}
+  $('rsec').textContent=left;$('rprog').textContent='Ciclo '+(c+1)+' de '+total;left--};
+ step();B=setInterval(step,1000);$('rbtn').textContent='Detener'};
+function fin(pre){stopB();$('rtxt').textContent='Sesión completada';
+ $('rend').innerHTML='<label>¿Cómo te sientes ahora (1-10)? <input type="range" id="post" min="1" max="10" value="'+pre+'"></label> <button id="pok" style="background:var(--mint)">Ver resultado</button><p id="pres"></p>';
+ $('pok').onclick=()=>{const p=+$('post').value;$('pres').textContent=p<pre?'Tu malestar bajó de '+pre+' a '+p+'. Buen trabajo.':'Sigues en '+p+'. Puedes repetir la técnica, probar otra o hablar con alguien de confianza o un profesional.'}}
+
+/* Asistente */
+const hist=[],norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+function add(w,t){const d=document.createElement('div');d.className='b '+w;d.textContent=t;$('chat').appendChild(d);$('chat').scrollTop=1e9}
+function local(q){const s=norm(q);let best=null,sc=0;FAQ.forEach(f=>{const n=f.k.filter(w=>s.includes(w)).length;if(n>sc){sc=n;best=f}});return best?best.r:"No encontré una respuesta para eso. Prueba con otras palabras o elige una de las preguntas de arriba. Si necesitas apoyo personal, usa los contactos de abajo."}
+async function ask(q){q=q.trim().slice(0,500);if(!q)return;add('u',q);add('b',CRISIS.test(norm(q))?CRISIS_MSG:local(q))}
+PREG.forEach(p=>{const b=document.createElement('button');b.textContent=p;b.onclick=()=>ask(p);$('chips').appendChild(b)});
+$('send').onclick=()=>{ask($('q').value);$('q').value=''};$('q').onkeydown=e=>{if(e.key==='Enter')$('send').click()};
+add('b','Hola, aquí puedes resolver dudas comunes sobre SerenVR. Elige una pregunta o escribe la tuya con pocas palabras, por ejemplo: «ansiedad», «dormir» o «no se oye».');
+document.querySelectorAll('[data-ico]').forEach(el=>{const v=ICONOS[el.dataset.ico];if(v){el.textContent='';el.appendChild(icoEl(v))}});
+route();
+</script>
+</body>
+</html>
