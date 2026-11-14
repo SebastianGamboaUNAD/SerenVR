@@ -6,7 +6,7 @@
 const CONTACTO_HTML=`<p>Emergencias: <b>123</b>.<br>
 Línea Nacional de Salud Mental: <b>106</b> (gratuita, atiende en todo el país).<br>
 Teleorientación en salud mental del Ministerio de Salud: <b>192, opción 4</b>.<br>
-Soporte de SerenVR: <b>escribe aquí tu correo</b>.</p>`;
+Soporte de SerenVR: <b>SerenVR@gmail.com</b>.</p>`;
 
 // ICONOS del menú lateral y de las tarjetas del inicio.
 // Puedes poner un emoji ("🌿") o la ruta de una imagen PNG/SVG ("assets/img/icons/respirar.png").
