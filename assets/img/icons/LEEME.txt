@@ -1,1 +1,0 @@
-Sube aqui tus iconos (PNG con fondo transparente o SVG, de 64x64 a 128x128 px, de color claro). Ejemplo de uso en config.js: ico:"assets/img/icons/lluvia.png"
