@@ -1,9 +1,8 @@
 
 
-
 const CONTACTO_HTML=`<p>Emergencias: <b>123</b>.<br>
 Línea Nacional de Salud Mental: <b>106</b> (gratuita, atiende en todo el país).<br>
-Teleorientación en salud mental del Ministerio de Salud: <b>192, opción 4</b>.<br>;
+Teleorientación en salud mental del Ministerio de Salud: <b>192, opción 4</b>.</p>`;
 
 
 const ICONOS={
@@ -20,20 +19,19 @@ const BREATH_MUSIC="assets/audio/musica.mp3";
 
 const AUDIOS=[
  {t:"Lluvia suave",f:"assets/audio/Lluvia.mp3",ico:"🌧"},
- {t:"Música relajante",f:"assets/audio/Relajante_1.mp3",ico:"🎶"},
- {t:"Música relajante",f:"assets/audio/Relajante_2.mp3",ico:"🎶"},
- {t:"Música relajante",f:"assets/audio/Memoria_distante.mp3",ico:"🎶"},
- {t:"Música relajante",f:"assets/audio/Bajo_la_lluvia.mp3",ico:"🎶"}, 
- {t:"Música relajante",f:"assets/audio/Mañana.mp3",ico:"🎶"},
- {t:"Meditación",f:"assets/audio/Meditación_1.mp3",ico:"🌊"},
- {t:"Meditación",f:"assets/audio/Meditación_2.mp3",ico:"🌊"},
+ {t:"Música relajante 1",f:"assets/audio/Relajante_1.mp3",ico:"🎶"},
+ {t:"Música relajante 2",f:"assets/audio/Relajante_2.mp3",ico:"🎶"},
+ {t:"Memoria distante",f:"assets/audio/Memoria_distante.mp3",ico:"🎶"},
+ {t:"Bajo la lluvia",f:"assets/audio/Bajo_la_lluvia.mp3",ico:"🎶"},
+ {t:"Mañana",f:"assets/audio/Mañana.mp3",ico:"🎶"},
+ {t:"Meditación 1",f:"assets/audio/Meditación_1.mp3",ico:"🌊"},
+ {t:"Meditación 2",f:"assets/audio/Meditación_2.mp3",ico:"🌊"},
  {t:"Bosque",f:"assets/audio/Naturaleza.mp3",ico:"🌲"}
-
 ];
 
 
 const COMPLETA=[
- {t:"Bosque",v:"assets/videos/Naturaleza.mp4",a:"assets/audio/Naturaleza.mp3",ico:"🏔"}, 
+ {t:"Bosque",v:"assets/videos/Naturaleza.mp4",a:"assets/audio/Naturaleza.mp3",ico:"🏔"},
  {t:"Amanecer nevado",v:"assets/videos/Relajante_1.mp4",a:"assets/audio/Relajante_1.mp3",ico:"🌅"},
  {t:"Bosque atardecer",v:"assets/videos/Relajante_2.mp4",a:"assets/audio/Relajante_2.mp3",ico:"🏔"},
  {t:"Meditación 1",v:"assets/videos/Meditación_1.mp4",a:"assets/audio/Meditación_1.mp3",ico:"🌲"},
@@ -43,7 +41,6 @@ const COMPLETA=[
  {t:"Merecido descanso",v:"assets/videos/Bajo_la_lluvia.mp4",a:"assets/audio/Bajo_la_lluvia.mp3",ico:"🌲"},
  {t:"Cielo estrellado",v:"assets/videos/Estrellas.mp4",a:"assets/audio/Estrellas.mp3",ico:"🌅"}
 ];
-
 
 const TEC={
  estres:{n:"estrés",d:"Exhalar más largo que inhalar ayuda a bajar la tensión (4 segundos inhalando, 6 exhalando).",p:[["Inhala",4,1.5],["Exhala",6,1]]},
