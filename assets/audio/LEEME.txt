@@ -1,1 +1,0 @@
-Sube aqui tus audios (mp3, ogg o m4a). Los nombres deben coincidir con config.js. Ej: lluvia.mp3, musica.mp3, mar.mp3, bosque.mp3
